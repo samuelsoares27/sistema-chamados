@@ -1,0 +1,46 @@
+.logo {
+  padding: 20px;
+  width: 170px;
+  height: 130px;
+}
+
+.containerLogin {
+  margin-top: 5%;
+}
+
+.divLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #181c2c;
+}
+
+.titulo {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 2%;
+}
+.btnAcessar {
+  width: 100% !important;
+  background-color: #181c2c;
+  color: white;
+  border: none;
+  transition: 0.5;
+}
+
+.btnAcessar:hover {
+  background-color: #242a42;
+  color: #fff;
+}
+
+.LinkRegister {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.LinkRegister:hover {
+  color: rgb(128, 128, 128);
+}
