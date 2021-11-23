@@ -1,18 +1,24 @@
 import './signup.css'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
-
+import { AuthContext } from '../../contexts/auth'
+  
 function SignUp() {
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signUp, loadingAuth } = useContext(AuthContext);
 
-  function criaConta(e) {
+  async function criaConta(e) {
     e.preventDefault();
-    alert('teste')
+
+    if (nome !== '' && email !== '' && password !== '') {
+     signUp(email, password, nome);  
+    }
+
   }
 
   return (
@@ -31,7 +37,7 @@ function SignUp() {
                 type="text"
                 placeholder="fulano da silva"
                 value={nome}
-                onChange={() => setNome(nome)}
+                onChange={(e) => setNome(e.target.value)}
               />
             </Form.Group>
 
@@ -41,7 +47,7 @@ function SignUp() {
                 type="email"
                 placeholder="email@email.com"
                 value={email}
-                onChange={() => setEmail(email)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
 
@@ -51,11 +57,11 @@ function SignUp() {
                 type="password"
                 placeholder="*********"
                 value={password}
-                onChange={()=> setPassword(password)}
+                onChange={(e)=> setPassword(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="btnAcessar" >
-              Cadastrar
+              { loadingAuth ? 'Carregando...' : 'Cadastrar' }
             </Button >
             <Link to="/" className="LinkRegister">Já tem uma conta? Entre</Link>
           </Form>

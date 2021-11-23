@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './signin.css';
 import logo from '../../assets/logo.png'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { AuthContext } from '../../contexts/auth'
 
 function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const {signIn, loadingAuth} = useContext(AuthContext);
 
   function fazerLogin(e) {
     e.preventDefault();
-    alert('teste')
+
+    if (email !== '' && password !== '') {
+      signIn(email, password);  
+    }
+    
   }
 
   return (
@@ -30,7 +35,7 @@ function SignIn() {
                 type="email"
                 placeholder="email@email.com"
                 value={email}
-                onChange={() => setEmail(email)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
 
@@ -40,13 +45,13 @@ function SignIn() {
                 type="password"
                 placeholder="*********"
                 value={password}
-                onChange={()=> setPassword(password)}
+                onChange={(e)=> setPassword(e.target.value)}
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="btnAcessar" >
-              Acessar
+              {loadingAuth ? 'Carregando...' : 'Acessar'}
             </Button >
-            <Link to="/register" className="LinkRegister"> Criar uma conta</Link>
+            <Link to="/register" className="LinkRegister">Criar uma conta</Link>
           </Form>
         </Col>
       </Row> 

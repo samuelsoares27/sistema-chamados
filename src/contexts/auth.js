@@ -11,7 +11,6 @@ function AuthProvider({ children }) {
 
     useEffect(() => {
         
-
         function loadStorage() {
             const storageUser = localStorage.getItem('SistemaUser');
             if (storageUser) {
@@ -25,8 +24,92 @@ function AuthProvider({ children }) {
 
     }, []);
 
+
+    async function signIn(email, senha) {
+
+        setLoadingAuth(true);
+        await firebase.auth().signInWithEmailAndPassword(email, senha)
+            .then(async (value) => {
+                let uid = value.user.uid;                
+                let user = await firebase.firestore().collection('users').doc(uid).get();    
+                let data = {
+                    uid: user.data().uid,
+                    nome: user.data().nome,
+                    email: user.data().email,
+                    avatarUrl: user.data().avatarUrl
+                };
+
+                setUser(data)
+                storageUser(data);
+                setLoadingAuth(false);
+
+
+        }).catch((error) => {
+            console.log(error);
+            setLoadingAuth(false);
+        })
+    }
+
+    async function signUp(email, senha, nome) {
+        
+        setLoadingAuth(true);
+        await firebase.auth().createUserWithEmailAndPassword(email, senha)
+            .then(async (value) => {
+                
+                let uid = value.user.uid;
+                await firebase.firestore().collection('users').doc(uid)
+                    .set({
+                        nome: nome,
+                        avatarUrl: null
+                    }).then(() => {
+                        
+                        let data = {
+                            uid: uid,
+                            nome: nome,
+                            email: email,
+                            avatarUrl: null
+                        };
+
+                        setUser(data)
+                        storageUser(data);
+                        setLoadingAuth(false);
+
+                    }).catch((error) => {
+                        console.log(error);
+                        setLoadingAuth(false);
+                    })
+                
+            }).catch((error) => {
+                console.log(error);
+                setLoadingAuth(false);
+            })
+    }
+
+    async function signOut() {
+        await firebase.auth().signOut();
+        storageUserClear();
+        setUser(null);
+    }
+
+    function storageUser(data) {
+        localStorage.setItem('SistemaUser', JSON.stringify(data));
+    }
+
+    function storageUserClear() {
+        localStorage.removeItem('SistemaUser');
+    }
+
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, loading }}>
+        <AuthContext.Provider
+            value={{
+                signed: !!user,
+                user,
+                loading,
+                signUp,
+                signOut,
+                signIn,
+                loadingAuth
+            }}>
             {children}
         </AuthContext.Provider>
     )
