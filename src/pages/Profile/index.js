@@ -1,25 +1,22 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/auth";
-import { Button, Container, Row, Col } from "react-bootstrap";
-import Header from '../../components/Header'
-import Title from "../../components/Title";
+import { Container, Row, Col } from 'react-bootstrap';
+import Header from '../../components/Header';
+import Title from '../../components/Title';
+import './profile.css'
 import { FiSettings } from "react-icons/fi";
 
-export default function Dashboard() {
-    
-    
+export default function Profile() {
     return (
         <div>
             <Header/>
             <Container>
                 <Row>
                     <Col md="12">
-                        <Title name="Chamados">
+                        <Title name="Meu Perfil">
                             <FiSettings color="#000" size={25} />
                         </Title>
                     </Col>
                 </Row>
             </Container>
-        </div>
+       </div>  
     );
 }

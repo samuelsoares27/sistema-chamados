@@ -1,0 +1,38 @@
+.tituloNav {
+  color: white !important;
+}
+
+.btnMenu {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.divFoto {
+  background: url("../../assets/cover.png");
+  background: #181c2e;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  border-radius: 5px;
+}
+.foto {
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(2px 3px 6px #121212);
+  object-fit: cover;
+  margin-top: 5px;
+}
+
+.labelBotao {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.icones {
+  cursor: pointer;
+}
