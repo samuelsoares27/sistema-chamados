@@ -1,23 +1,19 @@
 import './header.css'
 import avatar from '../../assets/avatar.png'
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import { Link } from 'react-router-dom';
-import { FiHome, FiUser, FiSettings } from "react-icons/fi";
+import { FiMessageSquare, FiUser, FiSettings } from "react-icons/fi";
 import {
   Button,
   Offcanvas,
   Navbar,
   Nav,
-  NavDropdown,
-  Form,
-  FormControl,
   Container
 } from 'react-bootstrap'
 
 
 export default function Header() {
-  const [show, setShow] = useState(false);
 
   const { signOut,user } = useContext(AuthContext);
   return (
@@ -43,7 +39,7 @@ export default function Header() {
                   </div>
                   <Link to="/dashboard">
                     <Button variant="primary" className='btnMenu'>
-                      <FiHome color="#fff" size={24} className='icones'/>
+                      <FiMessageSquare color="#fff" size={24} className='icones'/>
                       <label className='labelBotao'>Chamados</label>
                     </Button>                   
                   </Link>

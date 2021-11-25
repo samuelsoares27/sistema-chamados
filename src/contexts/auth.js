@@ -34,9 +34,9 @@ function AuthProvider({ children }) {
                 let uid = value.user.uid;                
                 let user = await firebase.firestore().collection('users').doc(uid).get();    
                 let data = {
-                    uid: user.data().uid,
+                    uid: value.user.uid,
                     nome: user.data().nome,
-                    email: user.data().email,
+                    email: value.user.email,
                     avatarUrl: user.data().avatarUrl
                 };
 
@@ -114,7 +114,9 @@ function AuthProvider({ children }) {
                 signUp,
                 signOut,
                 signIn,
-                loadingAuth
+                loadingAuth,
+                setUser,
+                storageUser
             }}>
             {children}
         </AuthContext.Provider>

@@ -4,7 +4,7 @@ import './title.css'
 
 export default function Title({children, name}) {
     return (
-        <Container>
+        <Container className="componenteTitulo">
             <Row className='rowTitulo'>
                 <Col md="12">
                     <div className='divTitle'>
