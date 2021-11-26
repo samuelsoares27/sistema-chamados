@@ -11,3 +11,15 @@
 .formCustomers {
   margin: 20px;
 }
+
+.btnSalvarProfile {
+  background-color: #181c2c;
+  color: white;
+  border: none;
+  transition: 0.5;
+}
+
+.btnSalvarProfile:hover {
+  background-color: #242a42;
+  color: #fff;
+}

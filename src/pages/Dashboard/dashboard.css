@@ -19,7 +19,7 @@
   margin: 1px;
 }
 
-.botaoNovoChamado {
+.divBotaoNovoChamado {
   display: flex;
   justify-content: flex-end;
 }
@@ -27,4 +27,16 @@
 .iconeAcaoChamado {
   margin-bottom: 15px;
   margin-left: -6px;
+}
+
+.btnBuscarMais {
+  background-color: #181c2c;
+  color: white;
+  border: none;
+  transition: 0.5;
+}
+
+.btnBuscarMais:hover {
+  background-color: #242a42;
+  color: #fff;
 }

@@ -6,6 +6,21 @@
   width: 100%;
   text-align: center;
   margin-top: 5px;
+  background-color: #181c2c;
+  color: white;
+  border: none;
+  transition: 0.5;
+}
+
+.btnSair {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.btnMenu:hover {
+  background-color: #242a42;
+  color: #fff;
 }
 
 .divFoto {

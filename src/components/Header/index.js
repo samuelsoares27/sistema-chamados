@@ -56,7 +56,7 @@ export default function Header() {
                     </Button>
                   </Link>   
                   
-                  <Button variant="danger" onClick={() => signOut()} className='btnMenu'>Sair</Button>
+                  <Button variant="danger" onClick={() => signOut()} className='btnSair'>Sair</Button>
                 </Nav>
               </div>
             </Offcanvas.Body>
