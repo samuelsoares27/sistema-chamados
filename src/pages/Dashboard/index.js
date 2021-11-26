@@ -95,56 +95,58 @@ export default function Dashboard() {
                         </div>
                     </Col>
                     <Col md="12" className="tableChamados">
-                       <Table striped bordered hover variant="dark">
-                            <thead>
-                                <tr className="text-center">
-                                <th>Codigo</th>
-                                <th>Cliente</th>
-                                <th>Assunto</th>
-                                <th>Status</th>
-                                <th>Data</th>
-                                <th className="text-center">#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                chamados.map((chamado, index) => {
-                                    return (
-                                        <tr key={index} className="text-center">
-                                            <td>{index + 1}</td>
-                                            <td>{chamado.cliente.nome}</td>
-                                            <td>{chamado.assunto}</td>
-                                            <td>{
-                                                chamado.status === 'Aberto' &&
-                                                <span className="statusAberto">{chamado.status}</span>
-                                            }{
-                                                chamado.status === 'Andamento' &&
-                                                <span className="statusAndamento text-center">{chamado.status}</span>
-                                            }{
-                                                chamado.status === 'Fechado' &&
-                                                <span className="statusFechado text-center">{chamado.status}</span>                                                
-                                            }
-                                            </td>
-                                            <td>{chamado.dataFormated}</td>
-                                            <td className="text-center">
-                                                <Link to={`/newservices/${chamado.id}`}> 
-                                                    <Button variant="warning" className="botoesAcaoChamado">
-                                                        <FiEdit2 color="#000" size={15} className="iconeAcaoChamado"/>
+                        <div class="table-responsive-sm">
+                            <Table striped bordered hover variant="dark">
+                                <thead>
+                                    <tr className="text-center">
+                                    <th>Codigo</th>
+                                    <th>Cliente</th>
+                                    <th>Assunto</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th className="text-center">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                    chamados.map((chamado, index) => {
+                                        return (
+                                            <tr key={index} className="text-center">
+                                                <td>{index + 1}</td>
+                                                <td>{chamado.cliente.nome}</td>
+                                                <td>{chamado.assunto}</td>
+                                                <td>{
+                                                    chamado.status === 'Aberto' &&
+                                                    <span className="statusAberto">{chamado.status}</span>
+                                                }{
+                                                    chamado.status === 'Andamento' &&
+                                                    <span className="statusAndamento text-center">{chamado.status}</span>
+                                                }{
+                                                    chamado.status === 'Fechado' &&
+                                                    <span className="statusFechado text-center">{chamado.status}</span>                                                
+                                                }
+                                                </td>
+                                                <td>{chamado.dataFormated}</td>
+                                                <td className="text-center">
+                                                    <Link to={`/newservices/${chamado.id}`}> 
+                                                        <Button variant="warning" className="botoesAcaoChamado">
+                                                            <FiEdit2 color="#000" size={15} className="iconeAcaoChamado"/>
+                                                        </Button>
+                                                    </Link>
+                                                    <Button variant="danger" className="botoesAcaoChamado" onClick={() => openModal(chamado)}>
+                                                        <FiSearch color="#000" size={15} className="iconeAcaoChamado"/>
                                                     </Button>
-                                                </Link>
-                                                <Button variant="danger" className="botoesAcaoChamado" onClick={() => openModal(chamado)}>
-                                                    <FiSearch color="#000" size={15} className="iconeAcaoChamado"/>
-                                                </Button>
-                                            </td>
-                                        </tr> 
-                                    ); 
-                                })    
-                            }
-                            </tbody>
-                        </Table> 
-                        { !isEmpty &&
-                            <Button onClick={handleMore} className="btnBuscarMais">Buscar mais</Button>
-                        }
+                                                </td>
+                                            </tr> 
+                                        ); 
+                                    })    
+                                }
+                                </tbody>
+                            </Table> 
+                            { !isEmpty &&
+                                <Button onClick={handleMore} className="btnBuscarMais">Buscar mais</Button>
+                                }
+                        </div>
                     </Col>
                 </Row>
             </Container>
