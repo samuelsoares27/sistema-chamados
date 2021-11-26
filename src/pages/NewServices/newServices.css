@@ -5,3 +5,21 @@
 .textAreaServices {
   resize: none;
 }
+
+.btnSalvarProfile {
+  background-color: #181c2c;
+  color: white;
+  border: none;
+  transition: 0.5;
+}
+
+.btnSalvarProfile:hover {
+  background-color: #242a42;
+  color: #fff;
+}
+
+.btnSalvarProfile:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #242a42;
+}

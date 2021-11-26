@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { FiMessageSquare } from 'react-icons/fi';
 import { AuthContext } from '../../contexts/auth';
 import { toast } from 'react-toastify';
+import { useHistory, useParams } from 'react-router-dom';
 import Header from '../../components/Header'
 import Title from '../../components/Title'
 import firebase from '../../services/firebaseConnection';
@@ -17,6 +18,9 @@ export default function NewServices() {
     const [assunto, setAssunto] = useState('');
     const [status, setStatus] = useState('Aberto');
     const [observacao, setObservacao] = useState('');
+    const [clienteAlterar, setClienteAlterar] = useState(false);
+    const { id } = useParams();
+    const history = useHistory();
     
     useEffect(() => {
         
@@ -40,7 +44,10 @@ export default function NewServices() {
                     } else {
                         setCliente(lista);
                     }
-                    
+
+                    if (id) {
+                        loadId(lista);
+                    }
 
                 }).catch(() => {
                     toast.error('Erro ao buscar os clientes');
@@ -48,7 +55,24 @@ export default function NewServices() {
         }
         loadCliente();
 
-    }, [])
+
+    }, [id, loadId])
+
+    async function loadId(lista) {
+        await firebase.firestore().collection('services').doc(id).get()
+            .then((snapshot) => {
+                setAssunto(snapshot.data().assunto);
+                setStatus(snapshot.data().status);
+                setObservacao(snapshot.data().observacao);
+
+                let index = lista.findIndex(item => item.id === snapshot.data().cliente.id);
+                setClienteSelecionado(index);
+                setClienteAlterar(true);
+            }).catch(() => {
+                toast.error('Ops, algo deu errado na edição');
+                setClienteAlterar(false);
+            })
+    }
 
     async function handleSave(e) {
         e.preventDefault();
@@ -57,7 +81,9 @@ export default function NewServices() {
             toast.error('Ops, é necessário preencher todos os campos');
             return;
         } else {
-            await firebase.firestore().collection('services')
+
+            if (!clienteAlterar) {
+                await firebase.firestore().collection('services')
                 .add({
                     cliente: cliente[clienteSelecionado],
                     assunto: assunto,
@@ -75,6 +101,29 @@ export default function NewServices() {
                 }).catch(() => {
                     toast.error('Ops, algo deu errado');
                 })
+            } else {
+                await firebase.firestore().collection('services').doc(id)
+                .update({
+                    cliente: cliente[clienteSelecionado],
+                    assunto: assunto,
+                    status: status,
+                    observacao: observacao,
+                    user: user
+                }).then(() => {
+                    toast.success('Alterado com Sucesso!');
+                    setClienteSelecionado(0);
+                    setAssunto('');
+                    setStatus('Aberto');
+                    setObservacao('');
+                    setClienteAlterar(false);
+                    history.push('/dashboard',); 
+                    
+                }).catch(() => {
+                    toast.error('Ops, algo deu errado');
+                })
+            }
+                return;
+
         }
 
     }
@@ -150,7 +199,7 @@ export default function NewServices() {
                                     value={observacao} onChange={(e) => setObservacao(e.target.value)} />       
                             </Form.Group>                             
                             <Button variant="primary" type="submit" className="btnSalvarProfile">
-                                Cadastrar
+                                Salvar
                             </Button>
                         </Form>
                     </Col>

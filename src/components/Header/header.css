@@ -23,6 +23,12 @@
   color: #fff;
 }
 
+.btnMenu:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #242a42;
+}
+
 .divFoto {
   background: url("../../assets/cover.png");
   background: #181c2e;

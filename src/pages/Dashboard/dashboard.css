@@ -40,3 +40,48 @@
   background-color: #242a42;
   color: #fff;
 }
+
+.btnBuscarMais:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #242a42;
+}
+
+.statusAberto {
+  background-color: rgb(12, 88, 12);
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  height: 20px;
+  width: 55px;
+}
+
+.statusAndamento {
+  background-color: rgb(11, 33, 87);
+  color: white;
+  display: inline-block;
+  border-radius: 5px;
+  height: 20px;
+  width: 80px;
+}
+
+.statusFechado {
+  background-color: rgb(128, 0, 0);
+  color: white;
+  display: inline-block;
+  border-radius: 5px;
+  height: 20px;
+  width: 60px;
+}
+
+.labelStatusAberto {
+  margin-left: 12%;
+}
+
+.labelStatusAndamento {
+  margin-left: 5%;
+}
+
+.labelStatusFechado {
+  margin-left: 5%;
+}
